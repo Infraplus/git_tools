@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [ $# -lt 4 ]; then
+  echo "Usage: $0 -m \"MESSAGE\" -p \$(pwd)"
+  exit 2
+fi
+
+
+usage() { echo "Usage: $0 -m \"MESSAGE\" -p \$(pwd)" 1>&2; exit 1; }
+
+while getopts ":m:p:" o; do
+    case "${o}" in
+        m)
+            message=${OPTARG}
+            ;;
+        p)
+            path=${OPTARG}
+            ;;
+        *)
+            usage
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+cd $path
+[[ $? -ne 0 ]] && echo "error cd " && exit 3
+
+git add --all :/&& git commit -m"$message" && git push
