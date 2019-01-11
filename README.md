@@ -10,6 +10,7 @@ This script do the following tasks:
 ## Install
 Copy gacp script in /usr/local/bin/ and add execution right:
 ```
+sudo cp gacp /usr/local/bin/gacp
 sudo chmod 755 /usr/local/bin/gacp
 ```
 
